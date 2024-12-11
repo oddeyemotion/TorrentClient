@@ -15,7 +15,7 @@ class Run(object):
     last_log_line = ""
 
     def __init__(self):
-        self.torrent = torrent.Torrent().load_from_path("torrent name")
+        self.torrent = torrent.Torrent().load_from_path("https://utweb.rainberrytv.com/gui/share.html#link=magnet%3A%3Fxt%3Durn%3Abtih%3Ac9b95ba6edc651095aed7be0a606ae9aef6f5600%26dn%3D2D%2520ball%2520gripper.STL%26tr%3Dudp%253a%252f%252ftracker.openbittorrent.com%253a80%252fannounce%26tr%3Dudp%253a%252f%252ftracker.opentrackr.org%253a1337%252fannounce")
         self.tracker = tracker.Tracker(self.torrent)
 
         self.pieces_manager = pieces_manager.PiecesManager(self.torrent)
