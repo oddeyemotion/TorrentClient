@@ -9,7 +9,7 @@ import message
 
 
 class Peer(object):
-    def __init__(self,number_of_pieces,ip,port = 6881):
+    def __init__(self,number_of_pieces,ip,port = 6881, source_address = None):
         self.last_call = 0.0
         self.healthy = False
         self.read_buffer = b''
@@ -31,7 +31,7 @@ class Peer(object):
     
     def connect(self):
         try:
-            self.socket = socket.create_connection((self.ip, self.port), timeout=2)
+            self.socket = socket.create_connection((self.ip, self.port), timeout=2, source_address = None)
             self.socket.setblocking(False)
             logging.debug("Connected to peer ip: {} - port: {}".format(self.ip, self.port))
             self.healthy = True

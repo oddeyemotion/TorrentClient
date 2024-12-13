@@ -73,9 +73,13 @@ class PeersManager(Thread):
 
         while True:
             try:
-                buff = sock.recv(4096)
-                if len(buff) <= 0:
-                    break
+                if peer.healthy and peer.socket:
+                    buff = sock.recv(4096)
+                    if len(buff) <= 0:
+                        break
+                else:
+                    logging.warning("Attempted to read from an invalid or unhealthy socket.")
+                
 
                 data += buff
             except socket.error as e:
@@ -91,7 +95,9 @@ class PeersManager(Thread):
     
     def run(self):
         while self.is_active:
-            read = [peer.socket for peer in self.peers]
+            read = [peer.socket for peer in self.peers] # if peer.socket is not None and peer.healthy           
+            logging.debug("Active peers: {}".format([peer.ip for peer in self.peers if peer.healthy and peer.socket is not None]))
+            logging.debug("Read sockets: {}".format(read))
             read_list, _, _ = select.select(read, [], [], 1)
 
             for socket in read_list:

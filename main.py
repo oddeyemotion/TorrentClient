@@ -15,7 +15,7 @@ class Run(object):
     last_log_line = ""
 
     def __init__(self):
-        self.torrent = torrent.Torrent().load_from_path("torrent name")
+        self.torrent = torrent.Torrent().load_from_path("C:\\Users\\My Computer\\Downloads\\ubuntu-24.10-desktop-amd64.iso.torrent")
         self.tracker = tracker.Tracker(self.torrent)
 
         self.pieces_manager = pieces_manager.PiecesManager(self.torrent)
